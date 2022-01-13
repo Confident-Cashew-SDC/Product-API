@@ -6,7 +6,7 @@ Create database productapi;
 
 CREATE TABLE Product (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
- name VARCHAR(25) NOT NULL,
+ name VARCHAR(50) NOT NULL,
  slogan TEXT,
  description TEXT,
  category VARCHAR(25) NOT NULL,
@@ -16,16 +16,16 @@ CREATE TABLE Product (
 
 CREATE TABLE Features (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
- product_id INTEGER UNIQUE NOT NULL,
- feature VARCHAR(25) NOT NULL,
- value VARCHAR(25) NOT NULL
+ product_id INTEGER NOT NULL,
+ feature VARCHAR(50) NOT NULL,
+ value VARCHAR(50) NOT NULL
 );
 
 
 CREATE TABLE styles (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
- productId INTEGER NOT NULL UNIQUE,
- name VARCHAR(35) NOT NULL,
+ productId INTEGER NOT NULL,
+ name VARCHAR(50) NOT NULL,
  original_price INTEGER NOT NULL Check (original_price > 0),
  sale_price INTEGER CHECK (sale_price = null OR sale_price <= original_price),
  default_style INTEGER NOT NULL
@@ -35,16 +35,16 @@ CREATE TABLE styles (
 
 CREATE TABLE Skus (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
- styleId INTEGER NOT NULL UNIQUE,
+ styleId INTEGER NOT NULL,
  quantity INTEGER NOT NULL,
- size VARCHAR(5) NOT NULL
+ size VARCHAR(10) NOT NULL
 );
 
 
 
 CREATE TABLE Photos (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
- styleId INTEGER UNIQUE,
+ styleId INTEGER,
  url TEXT NOT NULL,
  thumbnail_url TEXT NOT NULL
 );
@@ -53,7 +53,7 @@ CREATE TABLE Photos (
 
 CREATE TABLE Related (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
- current_product_id INTEGER NOT NULL UNIQUE,
+ current_product_id INTEGER NOT NULL,
  related_product_id INTEGER NOT NULL
 );
 
