@@ -26,8 +26,8 @@ CREATE TABLE styles (
  id BIGSERIAL NOT NULL UNIQUE PRIMARY KEY,
  productId INTEGER NOT NULL,
  name VARCHAR(50) NOT NULL,
- original_price TEXT NOT NULL,
  sale_price TEXT,
+ original_price INTEGER NOT NULL,
  default_style INTEGER NOT NULL
 );
 
