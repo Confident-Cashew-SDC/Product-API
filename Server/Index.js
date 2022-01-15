@@ -12,5 +12,5 @@ app.listen(Port, () => {
 });
 
 
-app.get('/products', controllers.getAllProducts);
-
+app.get('/products', controllers.getProducts);
+app.get('/products/styles', controllers.getProductStyles);
