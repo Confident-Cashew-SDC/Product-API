@@ -17,6 +17,10 @@ module.exports = {
     WHERE styles.product_id = ${product_id}
     ORDER BY styles.id`);
     db.query(sqlString, callback)
+  },
+  getRelatedProducts: (product_id, callback) => {
+    var sqlString = (`Select related_product_id from related WHERE related.current_product_id = ${product_id}`);
+    db.query(sqlString, callback)
   }
 }
 

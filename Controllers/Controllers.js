@@ -60,6 +60,19 @@ module.exports = {
         res.send(final)
       }
     })
+  },
+  getRelatedProducts: (req, res) => {
+    models.getRelatedProducts(req.query.product_id, (err, response) => {
+      if (err) {
+        res.status(404).send(err)
+      } else {
+        const final = [];
+        response.rows.forEach((id) => {
+          final.push(id.related_product_id)
+        })
+        res.send(final)
+      }
+    })
   }
 }
 
