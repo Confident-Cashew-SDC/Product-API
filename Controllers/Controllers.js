@@ -3,14 +3,16 @@ const models = require('../Models/Models.js');
 
 module.exports = {
   getProducts: (req, res) => {
-    if (req.query.product_id === undefined) {
-      models.getAllProducts()
-      .then((response) => {
-        res.send(response.rows)
-      })
-      .catch((err) => {
-        res.status(404).send(err)
-      })
+    let page = !isNaN(req.query.page) ? req.query.page : 1;
+    let count = !isNaN(req.query.count) ? req.query.count : 5;
+    if (page > 0 && count > 0 && req.query.product_id === undefined) {
+      models.getAllProducts(page, count)
+        .then((response) => {
+          res.send(response.rows);
+        })
+        .catch((error) => {
+          res.status(400).send(error);
+        })
     } else {
       models.getProduct(req.query.product_id)
       .then((response) => {

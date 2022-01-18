@@ -1,9 +1,11 @@
 const db = require('../Database/database.js');
 
 module.exports = {
-  getAllProducts: () => {
-    var sqlString = ('Select * from product limit 5');
-    return db.query(sqlString)
+  getAllProducts: (page, count) => {
+    const currentId = (count * (page - 1)) + 1;
+    const lastId = currentId + (count - 1);
+    const sqlString = `SELECT * FROM product WHERE id >= ${currentId} and id <= ${lastId}`;
+    return db.query(sqlString);
   },
   getProduct: (product_id) => {
     var sqlString = (`Select * from product Inner Join features ON features.product_id = product.id WHERE product.id = ${product_id}`);
