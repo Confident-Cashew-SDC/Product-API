@@ -1,13 +1,13 @@
 const db = require('../Database/database.js');
 
 module.exports = {
-  getAllProducts: (callback) => {
+  getAllProducts: () => {
     var sqlString = ('Select * from product limit 5');
-    db.query(sqlString, callback)
+    return db.query(sqlString)
   },
-  getProduct: (product_id, callback) => {
+  getProduct: (product_id) => {
     var sqlString = (`Select * from product Inner Join features ON features.product_id = product.id WHERE product.id = ${product_id}`);
-    db.query(sqlString, callback)
+    return db.query(sqlString)
   },
   getProductStyles: (product_id) => {
     // var sqlString = (`Select styles.id AS style_id, styles.product_id, styles.name, styles.sale_price, styles.original_price, styles.default_style, photos.thumbnail_url, photos.url, skus.id AS sku, skus.size, skus.quantity from styles
@@ -58,9 +58,14 @@ module.exports = {
   WHERE styles.product_id = ${product_id}`
     return db.query(sqlString)
   },
-  getRelatedProducts: (product_id, callback) => {
-    var sqlString = (`Select related_product_id from related WHERE related.current_product_id = ${product_id}`);
-    db.query(sqlString, callback)
+  getRelatedProducts: (product_id) => {
+    var sqlString = `SELECT
+    json_agg(
+      related_product_id
+    )
+    FROM related
+    WHERE current_product_id = ${product_id}`;
+    return db.query(sqlString)
   }
 }
 

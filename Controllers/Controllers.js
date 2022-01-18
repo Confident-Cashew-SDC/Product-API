@@ -4,28 +4,28 @@ const models = require('../Models/Models.js');
 module.exports = {
   getProducts: (req, res) => {
     if (req.query.product_id === undefined) {
-      models.getAllProducts((err, results) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
-          res.send(results.rows)
-        }
+      models.getAllProducts()
+      .then((response) => {
+        res.send(response.rows)
+      })
+      .catch((err) => {
+        res.status(404).send(err)
       })
     } else {
-      models.getProduct(req.query.product_id, (err, results) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
+      models.getProduct(req.query.product_id)
+      .then((response) => {
           const features = [];
-          results.rows.forEach((product) => {
+          response.rows.forEach((product) => {
             features.push({feature: product.feature, value: product.value});
           })
-          const final = results.rows[0];
+          const final = response.rows[0];
           delete final.feature;
           delete final.value;
           final.features = features;
           res.send(final)
-        }
+      })
+      .catch((err) => {
+        res.status(404).send(err)
       })
     }
   },
@@ -73,16 +73,12 @@ module.exports = {
     })
   },
   getRelatedProducts: (req, res) => {
-    models.getRelatedProducts(req.query.product_id, (err, response) => {
-      if (err) {
-        res.status(404).send(err)
-      } else {
-        const final = [];
-        response.rows.forEach((id) => {
-          final.push(id.related_product_id)
-        })
-        res.send(final)
-      }
+    models.getRelatedProducts(req.query.product_id)
+    .then((response) => {
+      res.send(response.rows[0].json_agg)
+    })
+    .catch((err) => {
+      res.status(404).send(err)
     })
   }
 }
