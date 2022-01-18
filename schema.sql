@@ -59,4 +59,6 @@ CREATE TABLE related (
   related_product_id INTEGER NOT NULL
 );
 
-
+Create index on styles (product_id);
+Create index on skus (style_id);
+Create index on photos (style_id);
