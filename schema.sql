@@ -63,4 +63,5 @@ Create index on styles (product_id);
 Create index on skus (style_id);
 Create index on photos (style_id);
 create index on related (current_product_id);
+Create index on related (related_product_id);
 Create index on features (product_id);
