@@ -8,7 +8,8 @@ module.exports = {
     return db.query(sqlString);
   },
   getProduct: (product_id) => {
-    var sqlString = (`Select * from product Inner Join features ON features.product_id = product.id WHERE product.id = ${product_id}`);
+    // do a json agg function here later
+    var sqlString = (`Select product.id as id, product.name, product.slogan, product.description, product.category, product.default_price, features.feature, features.value from product LEFT Join features ON features.product_id = product.id WHERE product.id = ${product_id}`);
     return db.query(sqlString)
   },
   getProductStyles: (product_id) => {

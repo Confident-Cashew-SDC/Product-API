@@ -1,64 +1,28 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
 
-export let options = {
-  vus: 1,
-  duration: '30s'
+export const options = {
+  vus: 100,
+  duration: '15s'
+  // stages: [
+  //   { duration: '2m', target: 100 }, // below normal load
+  //   { duration: '5m', target: 100 },
+  //   { duration: '2m', target: 200 }, // normal load
+  //   { duration: '5m', target: 200 },
+  //   { duration: '2m', target: 300 }, // around the breaking point
+  //   { duration: '5m', target: 300 },
+  //   { duration: '2m', target: 400 }, // beyond the breaking point
+  //   { duration: '5m', target: 400 },
+  //   { duration: '10m', target: 0 }, // scale down. Recovery stage.
+  // ],
 };
 
-// export default function () {
-//   var randomID = Math.floor(Math.random() * (1000011));
-//   var params = {
-//     product_id: randomID,
-//     page: 1,
-//     count: 5
-//   }
-//   // url.searchParams.append('product_id', `${randomID}`);
-//   // url.searchParams.append('page', '1');
-//   // url.searchParams.append('count', '5');
-//   http.get('http://localhost:3000/qa/questions', params);
-//   sleep(1);
-// };
 
-export default function () {
-  var randomID = Math.floor(Math.random() * (3518979));
-  var params = {
-    page: 1,
-    count: 5
-  }
-  // url.searchParams.append('product_id', `${randomID}`);
-  // url.searchParams.append('page', '1');
-  // url.searchParams.append('count', '5');
-  http.get(`http://localhost:3001/qa/questions/${randomID}/answers`, params);
-  sleep(1);
-};
 export default function () {
   var randomID = Math.floor(Math.random() * (1000011));
-  var params = {
-    body: 'test',
-    name: 'test',
-    email: 'test@gmail.com',
-    product_id: randomID
-  }
-  // url.searchParams.append('product_id', `${randomID}`);
-  // url.searchParams.append('page', '1');
-  // url.searchParams.append('count', '5');
-  http.post(`http://localhost:3001/qa/questions/`, params);
+  http.get(`http://localhost:3000/products/${randomID}`);
   sleep(1);
 };
-export default function () {
-  var randomID = Math.floor(Math.random() * (3518979));
-  var params = {
-    body: 'test',
-    name: 'test',
-    email: 'test@gmail.com',
-    photos: ['urlplaceholder/answer_5_photo_number_1.jpg', 'urlplaceholder/answer_5_photo_number_2.jpg']
-  }
-  // url.searchParams.append('product_id', `${randomID}`);
-  // url.searchParams.append('page', '1');
-  // url.searchParams.append('count', '5');
-  http.get(`http://localhost:3001/qa/questions/${randomID}/answers`, params);
-  sleep(1);
-};
+
 
 

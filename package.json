@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon ./server",
     "test": "jest",
-    "k6test": "k6 run ./k6/script.js"
+    "k6test": "k6 run ./k6.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,9 @@
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
     "express-promise-router": "^4.1.1",
+    "newrelic": "^8.7.1",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
-    "pg-promise": "^10.11.1",
-    "newrelic": "^8.7.0"
+    "pg-promise": "^10.11.1"
   }
 }
