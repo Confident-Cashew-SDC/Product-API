@@ -9,7 +9,31 @@ module.exports = {
   },
   getProduct: (product_id) => {
     // do a json agg function here later
-    var sqlString = (`Select product.id as id, product.name, product.slogan, product.description, product.category, product.default_price, features.feature, features.value from product LEFT Join features ON features.product_id = product.id WHERE product.id = ${product_id}`);
+    // var sqlString = (`Select product.id as id, product.name, product.slogan, product.description, product.category, product.default_price, features.feature, features.value from product LEFT Join features ON features.product_id = product.id WHERE product.id = ${product_id}`);
+    var sqlString = `SELECT
+    json_build_object(
+      'product_id', product.id,
+      'name', product.name,
+      'slogan', product.slogan,
+      'description', product.description,
+      'category', product.category,
+      'default_price', product.default_price,
+      'features', features
+    ) products
+    FROM product
+    LEFT JOIN (
+      SELECT
+      product_id,
+      json_agg(
+        json_build_object(
+          'feature', feature,
+          'value', value
+        )
+      ) features
+      FROM features
+      GROUP BY product_id
+    ) features ON (product.id = features.product_id)
+    WHERE product.id = ${product_id}`
     return db.query(sqlString)
   },
   getProductStyles: (product_id) => {

@@ -16,15 +16,15 @@ module.exports = {
     } else {
       models.getProduct(req.query.product_id)
       .then((response) => {
-          const features = [];
-          response.rows.forEach((product) => {
-            features.push({feature: product.feature, value: product.value});
-          })
-          const final = response.rows[0];
-          delete final.feature;
-          delete final.value;
-          final.features = features;
-          res.send(final)
+          // const features = [];
+          // response.rows.forEach((product) => {
+          //   features.push({feature: product.feature, value: product.value});
+          // })
+          // const final = response.rows[0];
+          // delete final.feature;
+          // delete final.value;
+          // final.features = features;
+          res.send(response.rows[0].products)
       })
       .catch((err) => {
         res.status(404).send(err)
