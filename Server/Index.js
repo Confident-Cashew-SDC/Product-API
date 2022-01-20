@@ -1,7 +1,8 @@
 require('newrelic');
+require('dotenv').config({path:__dirname+'../.env'})
 const express = require('express');
 const app = express();
-const Port = 3000;
+const Port = process.env.PORT;
 
 const controllers = require('../Controllers/Controllers.js');
 

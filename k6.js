@@ -35,7 +35,7 @@ export const options = {
 
 export default function () {
   let randomID = Math.floor(Math.random() * (1000000));
-  const res = http.get(`http://localhost:3000/products?product_id=${randomID}`);
+  const res = http.get(`http://localhost:3001/products/styles?product_id=${randomID}`);
   sleep(1);
   check(res, {
     'is status 200': r => r.status === 200,

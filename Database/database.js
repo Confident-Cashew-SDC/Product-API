@@ -1,9 +1,10 @@
+require('dotenv').config({path:__dirname+'../.env'})
 const { Pool } = require('pg')
 const pool = new Pool({
-  user: 'eric',
-  host: 'localhost',
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
   database: 'products',
-  port: 5432
+  port: process.env.DB_PORT
 })
 
 pool.connect()
