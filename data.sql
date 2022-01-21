@@ -10,10 +10,5 @@ COPY photos(id, style_id, url, thumbnail_url) FROM '/Users/eric/Downloads/photos
 
 COPY related(id, current_product_id, related_product_id) FROM '/Users/eric/Downloads/related.csv' DELIMITER ',' CSV HEADER;
 
--- SELECT * from Product limit 10;
--- for checking amount of products
--- \dt
--- for checking out table
 
-change to sql file
-run sql file
+

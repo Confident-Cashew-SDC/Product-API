@@ -50,7 +50,7 @@ module.exports = {
             'value', features.value
           )
         ) AS features FROM features WHERE features.product_id = product.id
-      ) AS hello
+      ) AS container
     )
 	) AS final FROM product WHERE product.id = ${product_id} ORDER BY product.id`
     return db.query(sqlString)

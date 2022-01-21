@@ -4,7 +4,8 @@
   "description": "productapi sdc",
   "main": "./server/index.js",
   "scripts": {
-    "start:dev": "nodemon ./server",
+    "start:dev": "nodemon ./Server",
+    "start": "node ./Server",
     "test": "jest",
     "k6test": "k6 run ./k6.js"
   },
